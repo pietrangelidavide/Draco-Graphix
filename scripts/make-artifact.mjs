@@ -1,5 +1,5 @@
-// Dopo "node scripts/build.mjs --demo": produce dist/artifact.html, un unico file con CSS e JS incorporati,
-// senza <html>/<head>/<body>, pronto da pubblicare come pagina condivisibile (anteprima dimostrativa).
+// Dopo "node scripts/build.mjs --demo": produce dist/artifact.html (frammento senza <html>/<head>/<body>, da pubblicare
+// come pagina condivisibile) e dist/demo.html (stesso contenuto come documento completo, da aprire con doppio clic).
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
@@ -24,4 +24,17 @@ ${js}
 </script>
 `;
 writeFileSync(join(dist, 'artifact.html'), html);
-console.log(`dist/artifact.html: ${(html.length / 1024).toFixed(0)} KB`);
+// stessa pagina con documento completo: si apre con un doppio clic, anche senza server
+const standalone = `<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0c0d10">
+</head>
+<body>
+${html}</body>
+</html>
+`;
+writeFileSync(join(dist, 'demo.html'), standalone);
+console.log(`dist/artifact.html: ${(html.length / 1024).toFixed(0)} KB · dist/demo.html: ${(standalone.length / 1024).toFixed(0)} KB`);

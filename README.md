@@ -49,7 +49,7 @@ Prezzi, ordini, pagamenti, bozze e preventivi si scrivono solo con funzioni del 
 | --- | --- |
 | `npm run dev` / `npm run dev:demo` | sviluppo con ricarica automatica (con o senza database) |
 | `npm run build` | produzione in `dist/` (usa `.env` se c'è) |
-| `npm run build:demo` | build demo + `dist/artifact.html`, singolo file condivisibile |
+| `npm run build:demo` | build demo + `dist/demo.html`, singolo file da aprire con doppio clic (e `dist/artifact.html` per pubblicarlo come pagina) |
 | `npm run icons` | rigenera le icone PNG da `public/favicon.svg` (serve Chromium di Playwright) |
 | `npm run typecheck` | controllo dei tipi |
 | `npm test` | test di prezzi e logica applicativa |
