@@ -1,0 +1,242 @@
+/* ---------- area clienti ---------- */
+.subnav {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--line);
+  scrollbar-width: thin;
+}
+.subnav a {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  min-height: 46px;
+  padding: 0 14px;
+  color: var(--muted);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -1px;
+}
+.subnav a:hover {
+  color: var(--ink);
+}
+.subnav a.on {
+  color: var(--ink);
+  border-bottom-color: var(--accent);
+}
+
+.todo {
+  display: flex;
+  flex-direction: column;
+}
+.todo li + li {
+  border-top: 1px solid color-mix(in srgb, var(--warn) 30%, transparent);
+}
+.todo a {
+  padding: 12px 4px;
+  color: var(--ink);
+  text-decoration: none;
+}
+.todo:not(.todo-admin) a {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: 14px;
+  row-gap: 2px;
+  align-items: center;
+}
+.todo:not(.todo-admin) a > b,
+.todo:not(.todo-admin) a > span {
+  grid-column: 1;
+  min-width: 0;
+}
+.todo:not(.todo-admin) a > span {
+  color: var(--muted);
+}
+.todo:not(.todo-admin) a > svg {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+}
+.todo-admin a {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.todo-admin a > span {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  color: var(--muted);
+}
+.todo a b {
+  color: var(--ink);
+}
+.todo a:hover b {
+  text-decoration: underline;
+}
+
+.rowlist {
+  display: flex;
+  flex-direction: column;
+}
+.rowlist li + li {
+  border-top: 1px solid var(--line);
+}
+.rowlist a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 11px 0;
+  color: var(--ink);
+  text-decoration: none;
+}
+.rowlist a > span:not(.chip):not(.avatar) {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.rowlist a:hover b {
+  text-decoration: underline;
+}
+
+.cardlist {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.listcard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 18px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  color: var(--ink);
+  text-decoration: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+a.listcard:hover {
+  border-color: var(--line-strong);
+  box-shadow: var(--shadow);
+}
+.listcard > div:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.listcard > div:first-child > span {
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+.listcard-side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  flex: none;
+}
+.listcard-side strong {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+.turn {
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  background: var(--accent);
+  color: var(--on-accent);
+  border-radius: 3px;
+  transform: skewX(-8deg);
+}
+
+.room {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+  gap: 20px;
+  align-items: start;
+}
+.brief-style {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  padding: 12px;
+  background: var(--panel-2);
+  border-radius: var(--r-sm);
+}
+
+.bikes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+  gap: 14px;
+}
+.bike {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+}
+.bike > div:nth-child(2) {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+.bike svg {
+  color: var(--accent-ink);
+  flex: none;
+}
+.bike-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-end;
+}
+.inline-form {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+}
+.inline-form .field {
+  flex: 1;
+}
+.brandlist {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+@media (max-width: 1000px) {
+  .room {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 520px) {
+  .listcard {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .listcard-side {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+}
+
+.listcard-static {
+  cursor: default;
+}
+
+.rowlist a > small:last-child {
+  white-space: nowrap;
+}

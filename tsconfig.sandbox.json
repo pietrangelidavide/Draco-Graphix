@@ -1,0 +1,5 @@
+{
+  "extends": "./tsconfig.json",
+  "include": ["src", "scripts", "tests", "tools/sandbox-react.d.ts"],
+  "exclude": ["dist", "node_modules"]
+}

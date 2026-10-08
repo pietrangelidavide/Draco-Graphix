@@ -1,0 +1,24 @@
+// Carica dist/artifact.html dentro un iframe isolato (senza same-origin: localStorage non disponibile) e prova una navigazione.
+import { chromium } from 'playwright';
+import { readFileSync, writeFileSync } from 'node:fs';
+const out = process.argv[2] ?? '.';
+const frag = readFileSync('dist/artifact.html', 'utf8');
+const doc = `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light}body{margin:0;font:14px system-ui}[hidden]{display:none!important}</style></head><body>${frag}</body></html>`;
+writeFileSync(`${out}/wrapper-doc.html`, doc);
+const host = `<!doctype html><body style="margin:0"><iframe id="f" sandbox="allow-scripts allow-popups" style="border:0;width:100vw;height:100vh" srcdoc="${doc.replace(/&/g, '&amp;').replace(/"/g, '&quot;')}"></iframe></body>`;
+const browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium' });
+const ctx = await browser.newContext({ viewport: { width: 1200, height: 800 } });
+await ctx.route(/fonts\.(googleapis|gstatic)\.com/, (r) => r.abort());
+const p = await ctx.newPage(); p.setDefaultTimeout(5000);
+const errs = []; p.on('pageerror', (e) => errs.push(e.message)); p.on('console', (m) => m.type() === 'error' && !/ERR_FAILED/.test(m.text()) && errs.push(m.text()));
+await p.setContent(host); await p.waitForTimeout(1200);
+console.log('errori iniziali:', errs.join(' | ') || 'nessuno'); const f = p.frameLocator('#f');
+await f.getByRole('link', { name: 'Kit grafiche' }).first().click(); await p.waitForTimeout(500);
+console.log('h1 dopo click su Kit grafiche:', await f.locator('h1').first().innerText());
+await f.getByRole('link', { name: 'Su misura' }).first().click(); await p.waitForTimeout(500);
+console.log('h1 dopo click su Su misura:', (await f.locator('h1').first().innerText()).slice(0, 40));
+await f.getByRole('button', { name: 'Entra nel gestionale' }).first().click(); await p.waitForTimeout(800);
+console.log('gestionale visibile:', await f.getByText('Panoramica').first().isVisible());
+await p.screenshot({ path: `${out}/artifact-iframe.png` });
+console.log(errs.length ? 'ERRORI: ' + errs.join(' | ') : 'nessun errore');
+await browser.close();

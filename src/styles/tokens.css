@@ -1,0 +1,105 @@
+/* Colori e misure di Draco Graphix. Il tema segue il sistema; il pulsante in fondo alla pagina può forzarlo con data-theme. */
+:root {
+  --bg: #f3f4f6;
+  --panel: #ffffff;
+  --panel-2: #f8f9fa;
+  --ink: #0e1013;
+  --muted: #565c66;
+  --line: #d8dce2;
+  --line-strong: #b9bfc8;
+  --field-line: #7a818c;
+  --accent: #d5141c;
+  --accent-ink: #b80f17;
+  --on-accent: #ffffff;
+  --ok: #0b7a4b;
+  --warn: #8a5200;
+  --bad: #c0262d;
+  --on-bad: #ffffff;
+  --info: #1f5fbf;
+  --ok-bg: #e2f3ea;
+  --warn-bg: #fbefd5;
+  --bad-bg: #fbe4e5;
+  --info-bg: #e4edfb;
+  --neutral-bg: #eceef2;
+  --head-bg: #ffffff;
+  --logo-hole: var(--head-bg);
+  --hero-bg: #0c0d10;
+  --hero-ink: #f3f4f6;
+  --hero-muted: #aeb4bf;
+  --side-bg: #0c0d10;
+  --side-ink: #e6e8ec;
+  --side-muted: #9ba2ae;
+  --art-bg: #101215;
+  --cut: #ff2a8a;
+  --bubble-me-bg: #0e1013;
+  --bubble-me-ink: #f3f4f6;
+  --shadow: 0 1px 2px rgb(14 16 19 / 6%), 0 8px 24px rgb(14 16 19 / 6%);
+  --r-sm: 6px;
+  --r: 10px;
+  --r-lg: 16px;
+  --font-display: 'Big Shoulders Display', 'Arial Narrow', Impact, sans-serif;
+  --font-body: 'Archivo', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #0c0d10;
+    --panel: #15171c;
+    --panel-2: #1b1e24;
+    --ink: #eef0f3;
+    --muted: #9ba2ae;
+    --line: #2a2e36;
+    --line-strong: #3b414c;
+    --field-line: #6f7683;
+    --accent: #e5202a;
+    --accent-ink: #ff6a70;
+    --ok: #3fd08a;
+    --warn: #f2b544;
+    --bad: #ff7a80;
+    --on-bad: #1a0507;
+    --info: #6ea8ff;
+    --ok-bg: #12301f;
+    --warn-bg: #33270c;
+    --bad-bg: #36151a;
+    --info-bg: #14233f;
+    --neutral-bg: #22262d;
+    --head-bg: #101216;
+    --side-bg: #090a0c;
+    --art-bg: #0a0b0d;
+    --bubble-me-bg: #2a2e36;
+    --bubble-me-ink: #eef0f3;
+    --shadow: 0 1px 2px rgb(0 0 0 / 40%), 0 8px 24px rgb(0 0 0 / 35%);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme='dark'] {
+  --bg: #0c0d10;
+  --panel: #15171c;
+  --panel-2: #1b1e24;
+  --ink: #eef0f3;
+  --muted: #9ba2ae;
+  --line: #2a2e36;
+  --line-strong: #3b414c;
+  --field-line: #6f7683;
+  --accent: #e5202a;
+  --accent-ink: #ff6a70;
+  --ok: #3fd08a;
+  --warn: #f2b544;
+  --bad: #ff7a80;
+  --on-bad: #1a0507;
+  --info: #6ea8ff;
+  --ok-bg: #12301f;
+  --warn-bg: #33270c;
+  --bad-bg: #36151a;
+  --info-bg: #14233f;
+  --neutral-bg: #22262d;
+  --head-bg: #101216;
+  --side-bg: #090a0c;
+  --art-bg: #0a0b0d;
+  --bubble-me-bg: #2a2e36;
+  --bubble-me-ink: #eef0f3;
+  --shadow: 0 1px 2px rgb(0 0 0 / 40%), 0 8px 24px rgb(0 0 0 / 35%);
+  color-scheme: dark;
+}

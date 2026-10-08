@@ -1,0 +1,30 @@
+{
+  "name": "draco-graphix",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Web app Draco Graphix: vetrina, area clienti e gestionale operativo in un'unica applicazione.",
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "dev:demo": "node scripts/dev.mjs --demo",
+    "build": "node scripts/build.mjs",
+    "build:demo": "node scripts/build.mjs --demo && node scripts/make-artifact.mjs",
+    "icons": "node scripts/make-icons.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "node --import tsx --test tests/*.test.ts",
+    "test:sql": "bash tests/sql/run.sh",
+    "seed:sql": "node --import tsx scripts/gen-seed-sql.ts"
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "esbuild": "^0.25.0",
+    "playwright-core": "^1.50.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0"
+  }
+}
