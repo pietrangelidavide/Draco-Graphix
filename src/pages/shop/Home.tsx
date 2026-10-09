@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Link, usePageTitle } from '../../router';
 import { useCatalog } from '../../state/catalog';
-import { LiveArt } from '../../components/art';
+import { BikeCompare } from '../../components/art';
 import { ProductCard } from '../../components/common';
 import { Icon, LinkButton } from '../../components/ui';
 import { eurShort } from '../../lib/money';
@@ -95,13 +95,13 @@ function Hero() {
               Scegli il tuo kit
             </LinkButton>
             <LinkButton to="/su-misura" size="lg" variant="ghost">
-              Preferisci una grafica su misura?
+              Grafica su misura
             </LinkButton>
           </div>
         </div>
         <div className="hero-art">
-          {hero && <LiveArt product={hero} number={number} name={name} base={base} finish={finish} />}
-          <p className="art-caption">Anteprima indicativa su {hero?.name ?? 'un kit'}. La grafica che ricevi è quella del kit che scegli.</p>
+          {hero && <BikeCompare product={hero} number={number} name={name} base={base} finish={finish} />}
+          <p className="art-caption">Anteprima indicativa con {hero?.name ?? 'un kit'}. La grafica che ricevi è quella del kit che scegli.</p>
         </div>
       </div>
     </section>

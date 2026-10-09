@@ -7,7 +7,7 @@ import { useCatalog } from '../../state/catalog';
 import { useQuery } from '../../state/useQuery';
 import { useUi } from '../../state/ui';
 import { useWishlist } from '../../state/wishlist';
-import { LiveArt } from '../../components/art';
+import { BikeCompare, LiveArt } from '../../components/art';
 import { Price, ProductCard } from '../../components/common';
 import { Button, ChoiceGroup, Empty, Icon, Input, Loading, Select } from '../../components/ui';
 import { eur, eurShort } from '../../lib/money';
@@ -55,6 +55,7 @@ function Detail({ product, brandName, leadTime }: { product: Product; brandName?
   const [qty, setQty] = useState(1);
   const [showErrors, setShowErrors] = useState(false);
   const [view, setView] = useState(0);
+  const [mode, setMode] = useState<'moto' | 'tavola'>('moto');
   const [added, setAdded] = useState(false);
 
   const priced = useMemo(() => priceLine(product, sel), [product, sel]);
@@ -125,7 +126,17 @@ function Detail({ product, brandName, leadTime }: { product: Product; brandName?
         <div className="pdp-gallery">
           <div className="pdp-main">
             {view === 0 || images.length === 0 ? (
-              <LiveArt product={product} number={role('rider_number')} name={role('rider_name')} base={role('base') || undefined} finish={role('finish') || undefined} />
+              <>
+                <div className="pdp-modes" role="group" aria-label="Come vuoi vederla">
+                  <button type="button" className={mode === 'moto' ? 'on' : ''} aria-pressed={mode === 'moto'} onClick={() => setMode('moto')}>Sulla moto</button>
+                  <button type="button" className={mode === 'tavola' ? 'on' : ''} aria-pressed={mode === 'tavola'} onClick={() => setMode('tavola')}>Tavola di stampa</button>
+                </div>
+                {mode === 'moto' ? (
+                  <BikeCompare product={product} number={role('rider_number')} name={role('rider_name')} base={role('base') || undefined} finish={role('finish') || undefined} />
+                ) : (
+                  <LiveArt product={product} number={role('rider_number')} name={role('rider_name')} base={role('base') || undefined} finish={role('finish') || undefined} />
+                )}
+              </>
             ) : (
               <img className="art" src={images[view - 1]} alt={`${product.name}, foto ${view}`} />
             )}
@@ -142,7 +153,7 @@ function Detail({ product, brandName, leadTime }: { product: Product; brandName?
               ))}
             </div>
           )}
-          <p className="art-caption">Anteprima indicativa: il disegno del kit è quello che vedi, nome e numero compaiono sulla tabella.</p>
+          <p className="art-caption">Anteprima indicativa: trascina il taglio per vedere la moto prima e dopo il kit. Il disegno è quello del kit, nome e numero compaiono sulla tabella.</p>
         </div>
 
         <div className="pdp-info">

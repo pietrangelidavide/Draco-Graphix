@@ -12,6 +12,7 @@ import { fmtDateTime, formatBytes, timeAgo } from '../lib/util';
 import type { Address, FileRef, OrderEvent, Payment, Product, ProjectMessage, Proof, Settings } from '../lib/types';
 import { ORDER_STATUS } from '../lib/status';
 import { KitArt } from './art';
+import { CompareSlider } from './compare';
 import { Button, Chip, Empty, Icon, Input, Loading, Modal, TextArea } from './ui';
 
 // ---------- accesso richiesto ----------
@@ -379,8 +380,10 @@ const PROOF_CHIP: Record<Proof['status'], { label: string; tone: 'warn' | 'ok' |
   sostituita: { label: 'Sostituita', tone: 'neutral' },
 };
 
-export function ProofViewer({ proofs, canDecide, onDecide }: {
+export function ProofViewer({ proofs, canDecide, onDecide, reference }: {
   proofs: Proof[]; canDecide: boolean; onDecide?: (proof: Proof, decision: 'approvata' | 'modifiche', comment: string) => Promise<unknown>;
+  /** Foto della moto del cliente (dagli allegati del brief): permette il confronto "la tua moto / bozza". */
+  reference?: FileRef;
 }) {
   const latest = proofs[proofs.length - 1];
   const [sel, setSel] = useState<string | null>(null);
@@ -389,21 +392,42 @@ export function ProofViewer({ proofs, canDecide, onDecide }: {
   const { run, busy } = useAction();
   const current = proofs.find((p) => p.id === sel) ?? latest;
   const url = useFileUrl(current?.file);
+  const refUrl = useFileUrl(reference);
+  const [compare, setCompare] = useState(true);
 
   if (!current) {
     return <Empty icon="pen" title="La prima bozza è in arrivo" text="Appena il grafico la carica la trovi qui, con il pulsante per approvarla o chiedere modifiche." />;
   }
   const chip = PROOF_CHIP[current.status];
+  const canCompare = !!reference && isImage(reference) && isImage(current.file);
   const pending = canDecide && current.status === 'in_attesa' && current.id === latest?.id;
 
   return (
     <div className="proofs">
       <div className="proof-main">
-        <div className="proof-img">
-          {isImage(current.file) ? (
-            url ? <a href={url} target="_blank" rel="noreferrer"><img src={url} alt={`Bozza versione ${current.version}`} /></a> : <span className="file-ph" />
+        <div className="proof-left">
+          {canCompare && compare && url && refUrl ? (
+            <CompareSlider
+              className="proof-cmp"
+              before={<img src={refUrl} alt="La tua moto" />}
+              after={<img src={url} alt={`Bozza versione ${current.version}`} />}
+              beforeLabel="La tua moto"
+              afterLabel={`Bozza v${current.version}`}
+              label="Confronta la foto della tua moto con la bozza"
+            />
           ) : (
-            <FileThumb file={current.file} />
+            <div className="proof-img">
+              {isImage(current.file) ? (
+                url ? <a href={url} target="_blank" rel="noreferrer"><img src={url} alt={`Bozza versione ${current.version}`} /></a> : <span className="file-ph" />
+              ) : (
+                <FileThumb file={current.file} />
+              )}
+            </div>
+          )}
+          {canCompare && (
+            <button type="button" className="link-btn" aria-pressed={compare} onClick={() => setCompare(!compare)}>
+              {compare ? 'Vedi solo la bozza' : 'Confronta con la tua moto'}
+            </button>
           )}
         </div>
         <div className="proof-info">

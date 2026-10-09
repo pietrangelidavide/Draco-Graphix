@@ -106,6 +106,7 @@ export function ProjectDetailPage({ id }: { id: string }) {
             <Card title="Bozze">
               <ProofViewer
                 proofs={p.proofs}
+                reference={p.files.find((f) => f.type.startsWith('image/'))}
                 canDecide={p.status === 'bozza_inviata'}
                 onDecide={(proof, decision, comment) => api.decideProof(proof.id, decision, comment)}
               />

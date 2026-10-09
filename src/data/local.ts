@@ -12,7 +12,7 @@ import type {
   SubmitProjectInput, SubmitQuoteInput,
 } from '../lib/types';
 
-const KEY = 'dg-demo-v1';
+const KEY = 'dg-demo-v2';
 
 function readStorage(): LocalDb | null {
   try {

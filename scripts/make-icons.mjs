@@ -7,8 +7,8 @@ import { dirname, join } from 'node:path';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const svg = readFileSync(join(root, 'public/favicon.svg'), 'utf8');
-const inner = svg.replace(/^[\s\S]*?<svg[^>]*>/, '').replace(/<\/svg>\s*$/, '').replace(/<rect[^>]*\/>/, '');
-const BG = '#0c0d10';
+const inner = svg.replace(/^[\s\S]*?<svg[^>]*>/, '').replace(/<\/svg>\s*$/, '').replace(/<circle[^>]*\/>/, '');
+const BG = '#0a0a0b';
 
 const page = (size, { bleed, scale }) => `<!doctype html><meta charset="utf8"><style>html,body{margin:0;background:${bleed ? BG : 'transparent'}}svg{display:block}</style>
 <svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 64 64">

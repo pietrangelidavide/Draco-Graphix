@@ -18,9 +18,10 @@
   overflow-y: auto;
   --head-bg: var(--side-bg);
   --ink: var(--side-ink);
-}
-.side .logo-text span {
-  color: #ff6a70;
+  --accent: var(--side-ink);
+  --accent-ink: var(--side-ink);
+  --on-accent: var(--side-bg);
+  --focus: var(--side-ink);
 }
 .side-top {
   display: flex;
@@ -56,19 +57,21 @@
 .side nav a.on {
   background: var(--accent);
   color: var(--on-accent);
+  clip-path: polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
 }
 .side-count {
   margin-left: auto;
   min-width: 22px;
   padding: 1px 7px;
-  border-radius: 999px;
+  border-radius: 0;
   background: rgb(255 255 255 / 16%);
   color: #fff;
   font-size: 0.75rem;
   text-align: center;
 }
 .side nav a.on .side-count {
-  background: rgb(0 0 0 / 28%);
+  background: var(--side-bg);
+  color: var(--side-ink);
 }
 .side-foot {
   display: flex;
@@ -265,7 +268,7 @@
 .col > header b {
   min-width: 28px;
   padding: 2px 8px;
-  border-radius: 999px;
+  border-radius: 0;
   background: var(--ink);
   color: var(--bg);
   text-align: center;

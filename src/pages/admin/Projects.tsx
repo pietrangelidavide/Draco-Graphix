@@ -148,7 +148,7 @@ export function AdminProjectDetailPage({ id }: { id: string }) {
         <div className="room">
           <div className="stack">
             <Card title="Bozze">
-              <ProofViewer proofs={p.proofs} canDecide={false} />
+              <ProofViewer proofs={p.proofs} reference={p.files.find((f) => f.type.startsWith('image/'))} canDecide={false} />
               {isProjectOpen(p.status) && (
                 <div className="stack proof-upload">
                   <h3>{lastProof ? `Carica la bozza v${lastProof.version + 1}` : 'Carica la prima bozza'}</h3>

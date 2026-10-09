@@ -38,12 +38,13 @@ declare module 'react' {
   export type FormEvent<T = Element> = BaseEvent<T>;
   export type MouseEvent<T = Element> = BaseEvent<T> & { button: number; metaKey: boolean; ctrlKey: boolean; shiftKey: boolean; altKey: boolean; clientX: number; clientY: number };
   export type KeyboardEvent<T = Element> = BaseEvent<T> & { key: string; metaKey: boolean; ctrlKey: boolean; shiftKey: boolean };
+  export type PointerEvent<T = Element> = BaseEvent<T> & { button: number; pointerId: number; pointerType: string; clientX: number; clientY: number };
   export type DragEvent<T = Element> = BaseEvent<T> & { dataTransfer: DataTransfer };
   export type HTMLAttributes<T> = Record<string, any>;
   export type ComponentProps<T> = any;
 }
 declare module 'react/jsx-runtime' {
-  import type { ChangeEvent, FormEvent, MouseEvent, KeyboardEvent, DragEvent } from 'react';
+  import type { ChangeEvent, FormEvent, MouseEvent, KeyboardEvent, DragEvent, PointerEvent } from 'react';
   interface DomAttrs {
     [k: string]: any;
     onChange?: (e: ChangeEvent<any>) => void;
@@ -52,6 +53,10 @@ declare module 'react/jsx-runtime' {
     onClick?: (e: MouseEvent<any>) => void;
     onMouseDown?: (e: MouseEvent<any>) => void;
     onKeyDown?: (e: KeyboardEvent<any>) => void;
+    onPointerDown?: (e: PointerEvent<any>) => void;
+    onPointerMove?: (e: PointerEvent<any>) => void;
+    onPointerUp?: (e: PointerEvent<any>) => void;
+    onPointerCancel?: (e: PointerEvent<any>) => void;
     onDragOver?: (e: DragEvent<any>) => void;
     onDragLeave?: (e: DragEvent<any>) => void;
     onDrop?: (e: DragEvent<any>) => void;

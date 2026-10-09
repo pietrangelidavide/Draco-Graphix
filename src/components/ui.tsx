@@ -406,20 +406,4 @@ export function Dl({ rows }: { rows: [string, ReactNode][] }) {
   );
 }
 
-export function Logo({ compact }: { compact?: boolean }) {
-  return (
-    <span className="logo" aria-label="Draco Graphix">
-      <svg viewBox="0 0 64 64" width="34" height="34" aria-hidden="true">
-        <path d="M10 10h24c11 0 20 8 20 22S45 54 34 54H10z" fill="var(--accent)" />
-        <path d="M24 24h9c5 0 8 3 8 8s-3 8-8 8h-9z" fill="var(--logo-hole)" />
-        <path d="M44 6l12 12-6 5z" fill="var(--ink)" />
-      </svg>
-      {!compact && (
-        <span className="logo-text">
-          <b>DRACO</b>
-          <span>GRAPHIX</span>
-        </span>
-      )}
-    </span>
-  );
-}
+export { Logo, Mark, Wordmark } from './logo';

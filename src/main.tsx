@@ -5,6 +5,8 @@ import { AuthProvider } from './state/auth';
 import { CatalogProvider } from './state/catalog';
 import { CartProvider } from './state/cart';
 import './styles/tokens.css';
+import './styles/brand.css';
+import './styles/compare.css';
 import './styles/base.css';
 import './styles/components.css';
 import './styles/shop.css';

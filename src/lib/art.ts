@@ -13,9 +13,9 @@ export interface ArtOptions {
   finish?: string;
 }
 
-const FALLBACK = ['#d81f26', '#14161a', '#f2f2f2'];
+export const FALLBACK = ['#d81f26', '#14161a', '#f2f2f2'];
 
-function luminance(hex: string): number {
+export function luminance(hex: string): number {
   const m = /^#?([0-9a-f]{6})$/i.exec(hex.trim());
   if (!m) return 0.5;
   const n = parseInt(m[1]!, 16);
@@ -26,7 +26,7 @@ function luminance(hex: string): number {
   return 0.2126 * ch[0]! + 0.7152 * ch[1]! + 0.0722 * ch[2]!;
 }
 
-const esc = (s: string) => s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!);
+export const esc = (s: string) => s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!);
 
 const PIECES = {
   side: 'M54 150 L408 96 Q462 88 474 138 L496 332 Q502 386 452 398 L118 474 Q64 486 50 432 Z',
@@ -134,6 +134,21 @@ export function kitArtSvg(seedKey: string, colors: string[], opts: ArtOptions = 
     piece('side') + piece('fender') + piece('forkL') + piece('forkR') + plateText + cut +
     `<g stroke="${c1 === '#14161a' ? '#fff' : c0}" stroke-width="2" opacity="0.5"><path d="M18 40V18H40M760 18H782V40M18 560V582H40M782 560V582H760"/></g>` +
     `</svg>`
+  );
+}
+
+
+/** Solo la grafica del kit (sfondo + forme), nello spazio 800×600 della tavola di stampa. */
+export function kitPattern(seedKey: string, colors: string[]): string {
+  const seed = hashString(seedKey);
+  return pattern(seed % 3, colors, rng(seed));
+}
+
+/** Gradienti per le basi cromo e olografica. */
+export function fxDefs(id: string): string {
+  return (
+    `<linearGradient id="${id}-chrome" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#eef1f5"/><stop offset=".22" stop-color="#7c8591"/><stop offset=".45" stop-color="#f9fbfd"/><stop offset=".7" stop-color="#59616c"/><stop offset="1" stop-color="#dfe3e9"/></linearGradient>` +
+    `<linearGradient id="${id}-holo" x1="0" y1="0" x2="1" y2="0.4"><stop offset="0" stop-color="#ff7ad9"/><stop offset=".25" stop-color="#7ad7ff"/><stop offset=".5" stop-color="#9dffb0"/><stop offset=".75" stop-color="#ffe27a"/><stop offset="1" stop-color="#c58cff"/></linearGradient>`
   );
 }
 

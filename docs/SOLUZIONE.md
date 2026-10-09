@@ -28,8 +28,15 @@ Tempi dichiarati: in media 3–5 giorni tra produzione e spedizione.
 
 Una sola applicazione, tre aree (dettagli in `README.md`).
 
+### Identità visiva
+Ridisegnata dal logo del cliente (drago bianco su nero, vettorializzato in `src/lib/brand.ts`).
+- **Solo bianco e nero**: i colori li portano le grafiche dei prodotti; i colori di stato (ok, attenzione, errore) restano solo funzionali.
+- **Angoli netti e taglio diagonale**, come le lame del drago: pulsanti, etichette, voce attiva del menu e bordo del cursore prima/dopo hanno la stessa inclinazione.
+- Titoli in corsivo maiuscolo (Saira, caricato da Google Fonts), testo in Archivo. Tema chiaro e scuro seguono il sistema.
+
 ### Vetrina e negozio
-- Home con **anteprima live**: scrivi il tuo numero e vedi la tabella portanumero cambiare (cornice con crocini di taglio, linea di fustella tratteggiata: il linguaggio della stampa).
+- Home con **cursore prima / dopo**: si trascina una barra (mouse, dito o frecce della tastiera) per passare dalla moto originale a quella con le grafiche; scrivi il tuo numero e il nome e la moto cambia. Lo stesso cursore compare nella scheda prodotto ("Sulla moto"), nel **Su misura** (anteprima con i colori scritti nel brief) e nelle bozze dell'area clienti (foto della moto contro bozza).
+- La moto mostrata è un'illustrazione vettoriale costruita nell'app (`src/lib/bike.ts`): con le foto reali del cliente basta sostituirla nei due livelli del cursore.
 - Catalogo con ricerca, filtri per marca e tipo, ordinamento; scheda prodotto con **configuratore** (modello, annata, nome, numero, base, laminazione) e prezzo che si aggiorna.
 - Carrello, pagamento con indirizzo, fattura (P.IVA, SDI, PEC), scelta tra bonifico e PayPal; pagina "ordine completato" con le istruzioni di pagamento.
 - **Su misura**: modulo di brief con allegati (loghi, foto), materiali, acconto e accesso/registrazione al momento dell'invio.

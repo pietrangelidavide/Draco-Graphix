@@ -4,8 +4,10 @@ import { Link, navigate, usePageTitle } from '../../router';
 import { useAuth } from '../../state/auth';
 import { useCatalog } from '../../state/catalog';
 import { useAction } from '../../state/ui';
+import { BikeCompare } from '../../components/art';
 import { AddressForm, FileInput, emptyAddress } from '../../components/common';
 import { Button, Card, Checkbox, ChoiceGroup, Icon, Input, Select, TextArea } from '../../components/ui';
+import { parseColors } from '../../lib/colors';
 import { eurShort } from '../../lib/money';
 import { yearChoices } from '../../lib/pricing';
 import { KIT_FIELDS } from '../../lib/seed';
@@ -23,6 +25,7 @@ function loadDraft(): ProjectBrief {
   }
 }
 
+const NEUTRAL = ['#e9e9e9', '#14161a', '#8b9097'];
 const choicesOf = (key: string) => (KIT_FIELDS.find((f) => f.key === key)?.choices ?? []).map((c) => ({ value: c.value, label: c.label }));
 
 export function CustomPage() {
@@ -38,6 +41,8 @@ export function CustomPage() {
   const [agree, setAgree] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const years = useMemo(() => yearChoices(), []);
+  const previewColors = useMemo(() => parseColors(brief.colors, NEUTRAL), [brief.colors]);
+  const previewProduct = useMemo(() => ({ slug: 'su-misura', art_colors: previewColors }), [previewColors]);
 
   useEffect(() => {
     try {
@@ -143,6 +148,10 @@ export function CustomPage() {
           </div>
 
           <div className="stack">
+            <Card title="Anteprima" className="preview-card">
+              <BikeCompare product={previewProduct} number={brief.rider_number} name={brief.rider_name} base={brief.base} finish={brief.finish} />
+              <p className="help">Un’idea di dove vanno numero, nome e colori. La grafica vera la disegna il nostro grafico, partendo dal tuo racconto.</p>
+            </Card>
             <Card title="Acconto" className="summary" tone="accent">
               <p className="sum-total">
                 <span>Da versare ora</span>

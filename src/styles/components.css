@@ -24,6 +24,23 @@
   opacity: 0.5;
   cursor: not-allowed;
 }
+.btn-primary,
+.btn-dark {
+  clip-path: polygon(0 0, 100% 0, calc(100% - 9px) 100%, 0 100%);
+  padding-right: 26px;
+  border-radius: 0;
+}
+.btn-primary:focus-visible,
+.btn-dark:focus-visible {
+  clip-path: none;
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+.btn-sm.btn-primary,
+.btn-sm.btn-dark {
+  clip-path: polygon(0 0, 100% 0, calc(100% - 7px) 100%, 0 100%);
+  padding-right: 20px;
+}
 .btn-primary {
   background: var(--accent);
   color: var(--on-accent);
@@ -110,9 +127,9 @@
 
 /* bordo inclinato come la linea di taglio */
 .btn.slant {
-  clip-path: polygon(0 0, 100% 0, calc(100% - 12px) 100%, 0 100%);
-  padding-right: 34px;
-  border-radius: 4px 0 0 4px;
+  clip-path: polygon(0 0, 100% 0, calc(100% - 14px) 100%, 0 100%);
+  padding-right: 38px;
+  border-radius: 0;
 }
 .btn.slant:focus-visible {
   clip-path: none;
@@ -308,7 +325,7 @@
   cursor: pointer;
 }
 .choice:focus-within {
-  outline: 3px solid var(--accent-ink);
+  outline: 3px solid var(--focus);
   outline-offset: 2px;
 }
 .choice.on {
@@ -329,8 +346,9 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 3px 10px 3px 8px;
-  border-radius: 999px;
+  padding: 3px 14px 3px 12px;
+  border-radius: 0;
+  clip-path: polygon(6px 0, 100% 0, calc(100% - 6px) 100%, 0 100%);
   font-size: 0.8125rem;
   font-weight: 600;
   line-height: 1.4;
@@ -368,7 +386,7 @@
   border: 0;
   padding: 0;
   cursor: pointer;
-  border-radius: 999px;
+  border-radius: 0;
 }
 .avatar {
   display: inline-grid;
@@ -603,7 +621,7 @@
 .tab-count {
   font-size: 0.75rem;
   padding: 1px 7px;
-  border-radius: 999px;
+  border-radius: 0;
   background: var(--neutral-bg);
   color: var(--muted);
 }
@@ -769,26 +787,17 @@
 .logo {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   color: var(--ink);
 }
-.logo-text {
-  display: flex;
+.logo .mark,
+.logo .wordmark {
+  display: block;
+  flex: none;
+}
+.logo-stacked {
   flex-direction: column;
-  line-height: 0.9;
-  font-family: var(--font-display);
-  text-transform: uppercase;
-}
-.logo-text b {
-  font-size: 1.55rem;
-  font-weight: 900;
-  letter-spacing: 0.04em;
-}
-.logo-text span {
-  font-size: 0.85rem;
-  font-weight: 700;
-  letter-spacing: 0.34em;
-  color: var(--accent-ink);
+  gap: 14px;
 }
 .brand {
   display: inline-flex;
@@ -1035,7 +1044,7 @@
   font-size: 0.8125rem;
   color: var(--muted);
   padding: 4px 12px;
-  border-radius: 999px;
+  border-radius: 0;
   background: var(--neutral-bg);
 }
 .chat-form {
@@ -1069,6 +1078,20 @@
   grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
   gap: 18px;
   align-items: start;
+}
+.proof-left {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+  min-width: 0;
+}
+.proof-left > .proof-img,
+.proof-left > .proof-cmp {
+  width: 100%;
+}
+.proof-cmp .cmp-layer img {
+  object-fit: contain;
 }
 .proof-img {
   background: var(--art-bg);
@@ -1273,4 +1296,21 @@
 .file-thumb-lg {
   width: 112px;
   height: 112px;
+}
+
+@media (max-width: 520px) {
+  .site-head .logo {
+    gap: 8px;
+  }
+  .site-head .logo .mark {
+    width: auto;
+    height: 30px;
+  }
+  .site-head .logo .wordmark {
+    width: auto;
+    height: 12px;
+  }
+  .head-tools .icon-btn {
+    width: 40px;
+  }
 }

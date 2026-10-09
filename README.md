@@ -62,9 +62,9 @@ Prezzi, ordini, pagamenti, bozze e preventivi si scrivono solo con funzioni del 
 src/
   pages/{shop,account,admin}/   le schermate delle tre aree
   layouts/                      testata e piè di pagina del sito, barra laterale del gestionale
-  components/                   elementi grafici condivisi (anteprima kit, stato, pagamenti, allegati…)
+  components/                   elementi grafici condivisi (logo, cursore prima/dopo, anteprima kit, stato, pagamenti, allegati…)
   data/                         interfaccia Api + due implementazioni: demo (browser) e Supabase
-  lib/                          tipi, prezzi (in centesimi), stati, dati di partenza del catalogo
+  lib/                          tipi, prezzi (in centesimi), stati, dati di partenza del catalogo; brand.ts (logo vettoriale), bike.ts (moto illustrata)
   state/                        accesso, carrello, catalogo, preferiti, notifiche
   styles/                       tema chiaro/scuro e stili per area
 supabase/                       schema.sql (tabelle, permessi, funzioni, archivio file) e seed.sql

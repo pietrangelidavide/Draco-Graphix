@@ -1,4 +1,5 @@
-import { kitArtUrl } from '../lib/art';
+import { kitArtUrl, svgDataUrl } from '../lib/art';
+import { bikeSvg } from '../lib/bike';
 import { BRANDS, catalogSeed, settingsSeed } from '../lib/seed';
 import { priceLine, totals } from '../lib/pricing';
 import type {
@@ -133,14 +134,17 @@ export function buildDemoDb(now: Date): LocalDb {
 
   // 1) Marco: due bozze, la seconda aspetta la sua risposta
   const art1 = ['#ff6a13', '#101215', '#f2f2f2'];
+  // foto "della moto del cliente" e bozze sulla stessa moto: così nell'area clienti il confronto prima/dopo funziona subito
+  const bikeUrl = (variant: 'stock' | 'custom', idPrefix: string, extra: Partial<Parameters<typeof bikeSvg>[0]> = {}) =>
+    svgDataUrl(bikeSvg({ variant, seedKey: 'drago', colors: art1, idPrefix, stage: true, ...extra }));
   projects.push({
     id: 'pr-1', number: `GP-${year}-0001`, user_id: 'u-marco', title: 'KTM EXC 300 – tema drago', status: 'bozza_inviata',
     brief: brief({ brand: 'KTM', model: 'EXC 300', year: '2021', rider_name: 'MARCO R', rider_number: '12', colors: 'Arancio, nero, un tocco di rosso', style: 'Un drago stilizzato che attraversa le fiancate, linee aggressive, niente di troppo “cartoon”.', sponsors: 'Logo officina “Rossi Moto” sul parafango' }),
-    files: [], deposit_cents: 5000, total_cents: null, revisions: 1, courier: '', tracking_code: '', shipping_address: users[2]!.address, staff_note: '', created_at: ago(8), updated_at: ago(0, 5),
+    files: [{ path: bikeUrl('stock', 'pf0'), name: 'la-mia-ktm.svg', size: 0, type: 'image/svg+xml' }], deposit_cents: 5000, total_cents: null, revisions: 1, courier: '', tracking_code: '', shipping_address: users[2]!.address, staff_note: '', created_at: ago(8), updated_at: ago(0, 5),
   });
   proofs.push(
-    { id: 'pf-1', project_id: 'pr-1', version: 1, file: { path: kitArtUrl('drago-v1', art1, { idPrefix: 'pf1', number: '12', name: 'MARCO R' }), name: 'bozza-v1.svg', size: 0, type: 'image/svg+xml' }, note: 'Prima idea: il drago sale dalla fiancata verso il serbatoio.', status: 'modifiche', customer_comment: 'Il drago mi piace! Lo vorrei più grande sulla fiancata e il numero più grosso.', created_at: ago(5), decided_at: ago(4, 6) },
-    { id: 'pf-2', project_id: 'pr-1', version: 2, file: { path: kitArtUrl('drago-v2', ['#ff6a13', '#0b0c0e', '#ffffff'], { idPrefix: 'pf2', number: '12', name: 'MARCO R', finish: 'lucido' }), name: 'bozza-v2.svg', size: 0, type: 'image/svg+xml' }, note: 'Drago ingrandito, numero a 150 pt, aggiunto il logo officina.', status: 'in_attesa', customer_comment: '', created_at: ago(0, 5), decided_at: null },
+    { id: 'pf-1', project_id: 'pr-1', version: 1, file: { path: bikeUrl('custom', 'pf1', { seedKey: 'drago-v1', number: '12', name: 'MARCO R', finish: 'opaco' }), name: 'bozza-v1.svg', size: 0, type: 'image/svg+xml' }, note: 'Prima idea: il drago sale dalla fiancata verso il serbatoio.', status: 'modifiche', customer_comment: 'Il drago mi piace! Lo vorrei più grande sulla fiancata e il numero più grosso.', created_at: ago(5), decided_at: ago(4, 6) },
+    { id: 'pf-2', project_id: 'pr-1', version: 2, file: { path: bikeUrl('custom', 'pf2', { seedKey: 'drago-v2', colors: ['#ff6a13', '#0b0c0e', '#ffffff'], number: '12', name: 'MARCO R', finish: 'lucido' }), name: 'bozza-v2.svg', size: 0, type: 'image/svg+xml' }, note: 'Drago ingrandito, numero a 150 pt, aggiunto il logo officina.', status: 'in_attesa', customer_comment: '', created_at: ago(0, 5), decided_at: null },
   );
   messages.push(
     sys('pr-1', 'Brief ricevuto. Appena arriva l’acconto il grafico inizia a lavorare.', 8),
