@@ -26,6 +26,17 @@ Apri http://localhost:5173. In alto c'è la barra "Versione dimostrativa": dalla
 
 Dal telefono, sulla stessa rete Wi-Fi: `http://<IP del PC>:5173`.
 
+## Demo online per il cliente (Cloudflare, gratis)
+
+La demo è solo file statici, con dati di prova nel browser di chi la apre. Il file `wrangler.jsonc` la pubblica su Cloudflare.
+
+1. Cloudflare → *Workers & Pages* → *Create application* → *Connect to Git* → repository `draco-graphix`, branch `main` (il repository è privato: va autorizzato a Cloudflare dalle impostazioni dell'app GitHub).
+2. Nome del progetto: `draco-graphix-demo` (uguale a `name` in `wrangler.jsonc`).
+3. Comando di build: `npm install && node scripts/build.mjs --demo`. Comando di deploy: `npx wrangler deploy`.
+4. Dopo il primo deploy: *Settings* → *Domains & Routes* → *Add* → *Custom domain* → l'indirizzo scelto (per esempio `draco.kernastudio.com`).
+
+Ogni push su `main` ripubblica la demo. La build demo aggiunge `_headers` e `robots.txt` per non farla indicizzare da Google.
+
 ## Metterla online con dati veri (Supabase)
 
 1. Crea un progetto su [supabase.com](https://supabase.com) (piano gratuito sufficiente per partire).

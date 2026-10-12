@@ -64,6 +64,11 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   rmSync(dist, { recursive: true, force: true });
   await build(options({ demo }));
   writeStatic();
+  if (demo) {
+    // la demo è per il cliente, non per Google: niente indicizzazione
+    writeFileSync(join(dist, '_headers'), '/*\n  X-Robots-Tag: noindex, nofollow\n');
+    writeFileSync(join(dist, 'robots.txt'), 'User-agent: *\nDisallow: /\n');
+  }
   const env = readEnv();
   console.log(demo || !(env.SUPABASE_URL && env.SUPABASE_ANON_KEY) ? 'Build in modalità DEMO (nessun database collegato).' : 'Build collegata a Supabase.');
 }
