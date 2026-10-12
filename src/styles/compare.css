@@ -1,4 +1,4 @@
-/* Cursore prima/dopo: il bordo è inclinato come le lame del logo (±4% della larghezza, a 16:10 sono circa 7°). */
+/* Cursore prima/dopo: un divisore verticale con maniglia tonda, come i confronti sul sito Apple. */
 @property --t {
   syntax: '<number>';
   inherits: true;
@@ -8,21 +8,21 @@
 .cmp-wrap {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
   min-width: 0;
 }
 .cmp {
-  --mid: calc(-4% + 108% * var(--t));
+  --mid: calc(100% * var(--t));
   position: relative;
   aspect-ratio: 16 / 10;
   overflow: hidden;
   background: linear-gradient(180deg, var(--stage-a), var(--stage-b) 68%, var(--stage-floor));
-  color: #0a0a0b;
+  color: #1d1d1f;
   touch-action: pan-y;
   user-select: none;
   -webkit-user-select: none;
   cursor: ew-resize;
-  clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--notch)), calc(100% - var(--notch)) 100%, 0 100%);
+  border-radius: var(--r-lg);
   container-type: inline-size;
 }
 .cmp:not(.is-drag) {
@@ -41,66 +41,63 @@
   height: 100%;
 }
 .cmp-before {
-  clip-path: polygon(0 0, calc(var(--mid) + 4%) 0, calc(var(--mid) - 4%) 100%, 0 100%);
+  clip-path: polygon(0 0, var(--mid) 0, var(--mid) 100%, 0 100%);
 }
 
 .cmp-line {
   position: absolute;
-  top: -10%;
-  bottom: -10%;
+  top: 0;
+  bottom: 0;
   left: var(--mid);
-  width: 3px;
-  margin-left: -1.5px;
-  background: #fff;
-  box-shadow: 0 0 0 1px rgb(0 0 0 / 22%), 0 0 16px rgb(0 0 0 / 30%);
-  transform: skewX(-7.3deg);
+  width: 2px;
+  margin-left: -1px;
+  background: rgb(255 255 255 / 92%);
+  box-shadow: 0 0 0 0.5px rgb(0 0 0 / 18%), 0 0 12px rgb(0 0 0 / 22%);
   pointer-events: none;
 }
 .cmp-knob {
   position: absolute;
   top: 50%;
-  left: clamp(36px, var(--mid), calc(100% - 36px));
-  width: 62px;
-  height: 46px;
-  width: clamp(44px, 9cqw, 62px);
-  height: clamp(34px, 6.8cqw, 46px);
+  left: clamp(26px, var(--mid), calc(100% - 26px));
+  width: clamp(40px, 7.5cqw, 52px);
+  height: clamp(40px, 7.5cqw, 52px);
   display: grid;
   place-items: center;
-  background: #0a0a0b;
-  color: #fff;
-  border: 3px solid #fff;
-  box-shadow: 0 6px 18px rgb(0 0 0 / 35%);
-  transform: translate(-50%, -50%) skewX(-7.3deg);
+  background: rgb(255 255 255 / 88%);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  color: #1d1d1f;
+  border: 0;
+  border-radius: 50%;
+  box-shadow: 0 2px 14px rgb(0 0 0 / 28%), 0 0 0 0.5px rgb(0 0 0 / 10%);
+  transform: translate(-50%, -50%);
   cursor: ew-resize;
   outline: none;
-}
-.cmp-knob svg {
-  transform: skewX(7.3deg);
+  transition: transform 0.2s ease, background-color 0.2s;
 }
 .cmp-knob:focus-visible {
-  box-shadow: 0 0 0 3px #fff, 0 0 0 6px #0a0a0b;
+  box-shadow: 0 0 0 3px #fff, 0 0 0 6px var(--blue);
 }
 .cmp.is-drag .cmp-knob {
   background: #fff;
-  color: #0a0a0b;
-  border-color: #0a0a0b;
+  transform: translate(-50%, -50%) scale(1.08);
 }
 
 .cmp-tag {
   position: absolute;
   top: 14px;
   top: clamp(8px, 2.4cqw, 14px);
-  padding: 5px 16px;
-  padding: clamp(3px, 0.8cqw, 5px) clamp(9px, 2.5cqw, 16px);
-  background: #0a0a0b;
+  padding: 5px 13px;
+  padding: clamp(3px, 0.8cqw, 5px) clamp(9px, 2.2cqw, 13px);
+  background: rgb(29 29 31 / 62%);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
   color: #fff;
-  font-family: var(--font-display);
-  font-style: italic;
-  font-weight: 700;
+  border-radius: 999px;
+  font-weight: 600;
   font-size: 0.75rem;
-  font-size: clamp(0.56rem, 2.5cqw, 0.75rem);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  font-size: clamp(0.6rem, 2.5cqw, 0.75rem);
+  letter-spacing: 0.01em;
   line-height: 1.2;
   pointer-events: none;
   transition: opacity 0.2s;
@@ -109,13 +106,11 @@
 .cmp-tag-before {
   left: 14px;
   left: clamp(8px, 2.4cqw, 14px);
-  clip-path: polygon(0 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
   opacity: clamp(0, calc((var(--t) - 0.2) * 8), 1);
 }
 .cmp-tag-after {
   right: 14px;
   right: clamp(8px, 2.4cqw, 14px);
-  clip-path: polygon(8px 0, 100% 0, 100% 100%, 0 100%);
   opacity: clamp(0, calc((0.8 - var(--t)) * 8), 1);
 }
 .cmp-hint {
@@ -123,38 +118,18 @@
   top: calc(50% + 40px);
   left: clamp(36px, var(--mid), calc(100% - 36px));
   transform: translateX(-50%);
-  padding: 3px 12px;
-  background: #fff;
-  color: #0a0a0b;
+  padding: 4px 12px;
+  background: rgb(255 255 255 / 92%);
+  color: #1d1d1f;
   font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  clip-path: polygon(6px 0, 100% 0, calc(100% - 6px) 100%, 0 100%);
+  font-weight: 600;
+  border-radius: 999px;
+  box-shadow: 0 2px 10px rgb(0 0 0 / 18%);
   pointer-events: none;
 }
 
 .cmp-modes {
-  display: flex;
-  gap: 0;
   align-self: flex-start;
-  border: 1.5px solid var(--field-line);
-  padding: 2px;
-  max-width: 100%;
-}
-.cmp-modes button {
-  border: 0;
-  background: none;
-  color: var(--ink);
-  padding: 7px 14px;
-  font-weight: 700;
-  font-size: 0.8125rem;
-  cursor: pointer;
-  min-height: 36px;
-  clip-path: polygon(0 0, 100% 0, calc(100% - 7px) 100%, 0 100%);
-}
-.cmp-modes button.on {
-  background: var(--ink);
-  color: var(--bg);
 }
 
 @media (max-width: 520px) {
@@ -171,25 +146,7 @@
 
 /* scelta della vista sulla scheda prodotto */
 .pdp-modes {
-  display: inline-flex;
-  margin-bottom: 10px;
-  border: 1.5px solid var(--field-line);
-  padding: 2px;
-}
-.pdp-modes button {
-  border: 0;
-  background: none;
-  color: var(--ink);
-  padding: 7px 14px;
-  font-weight: 700;
-  font-size: 0.8125rem;
-  cursor: pointer;
-  min-height: 36px;
-  clip-path: polygon(0 0, 100% 0, calc(100% - 7px) 100%, 0 100%);
-}
-.pdp-modes button.on {
-  background: var(--ink);
-  color: var(--bg);
+  margin-bottom: 12px;
 }
 .preview-card .cmp-modes {
   align-self: stretch;

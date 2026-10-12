@@ -331,7 +331,7 @@ export function QuoteDetailPage({ id }: { id: string }) {
           )}
           {x.status === 'inviato' && !expired && (
             <div className="row-actions">
-              <button className="btn btn-primary btn-lg slant" type="button" disabled={busy} onClick={() => decide(true)}>Accetta il preventivo</button>
+              <button className="btn btn-primary btn-lg" type="button" disabled={busy} onClick={() => decide(true)}>Accetta il preventivo</button>
               <button className="btn btn-ghost" type="button" disabled={busy} onClick={() => decide(false)}>Rifiuta</button>
             </div>
           )}

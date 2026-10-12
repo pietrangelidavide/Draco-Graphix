@@ -163,7 +163,7 @@ export function CustomPage() {
                 Accetto le <Link to="/condizioni">condizioni di vendita</Link> e l’<Link to="/privacy">informativa privacy</Link>.
               </Checkbox>
               {errors.agree && <p className="err" role="alert">{errors.agree}</p>}
-              <Button type="submit" size="lg" block busy={busy} className="slant">
+              <Button type="submit" size="lg" block busy={busy}>
                 {user ? 'Invia il brief' : 'Accedi e invia il brief'}
               </Button>
               {!user && <p className="help">Ti serve un account gratuito: il brief che hai scritto resta salvato.</p>}

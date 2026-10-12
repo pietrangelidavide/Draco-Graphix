@@ -219,7 +219,7 @@ function Detail({ product, brandName, leadTime }: { product: Product; brandName?
               </div>
             </div>
             <div className="buy-actions">
-              <Button type="submit" size="lg" block disabled={soldOut} className="slant">
+              <Button type="submit" size="lg" block disabled={soldOut}>
                 {soldOut ? 'Esaurito' : 'Aggiungi al carrello'}
               </Button>
               <button type="button" className={`heart heart-lg ${on ? 'on' : ''}`} aria-pressed={on} aria-label={on ? 'Togli dai preferiti' : 'Aggiungi ai preferiti'} onClick={() => void wish.toggle(product.id)}>

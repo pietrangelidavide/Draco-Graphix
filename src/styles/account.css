@@ -1,30 +1,32 @@
 /* ---------- area clienti ---------- */
 .subnav {
   display: flex;
-  gap: 4px;
+  gap: 6px;
   overflow-x: auto;
-  margin-bottom: 24px;
-  border-bottom: 1px solid var(--line);
-  scrollbar-width: thin;
+  margin-bottom: 28px;
+  padding: 2px;
+  scrollbar-width: none;
 }
 .subnav a {
   flex: none;
   display: inline-flex;
   align-items: center;
-  min-height: 46px;
-  padding: 0 14px;
+  min-height: 40px;
+  padding: 0 18px;
   color: var(--muted);
-  font-weight: 600;
+  font-weight: 500;
   text-decoration: none;
-  border-bottom: 3px solid transparent;
-  margin-bottom: -1px;
+  border-radius: 999px;
+  transition: background-color 0.2s, color 0.2s;
 }
 .subnav a:hover {
   color: var(--ink);
+  background: var(--fill);
+  text-decoration: none;
 }
 .subnav a.on {
-  color: var(--ink);
-  border-bottom-color: var(--accent);
+  color: var(--bg);
+  background: var(--ink);
 }
 
 .todo {
@@ -112,17 +114,18 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 16px 18px;
+  padding: 18px 20px;
   background: var(--panel);
   border: 1px solid var(--line);
   border-radius: var(--r);
   color: var(--ink);
   text-decoration: none;
-  transition: border-color 0.15s, box-shadow 0.15s;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 a.listcard:hover {
-  border-color: var(--line-strong);
+  transform: translateY(-2px);
   box-shadow: var(--shadow);
+  text-decoration: none;
 }
 .listcard > div:first-child {
   display: flex;
@@ -143,18 +146,19 @@ a.listcard:hover {
 }
 .listcard-side strong {
   font-family: var(--font-display);
-  font-size: 1.5rem;
-  font-weight: 800;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
   font-variant-numeric: tabular-nums;
 }
 .turn {
-  font-size: 0.75rem;
-  font-weight: 800;
-  padding: 2px 8px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 3px 10px;
   background: var(--accent);
   color: var(--on-accent);
-  border-radius: 3px;
-  transform: skewX(-8deg);
+  border-radius: 999px;
 }
 
 .room {
@@ -166,9 +170,9 @@ a.listcard:hover {
 .brief-style {
   white-space: pre-wrap;
   overflow-wrap: anywhere;
-  padding: 12px;
+  padding: 14px;
   background: var(--panel-2);
-  border-radius: var(--r-sm);
+  border-radius: 14px;
 }
 
 .bikes {

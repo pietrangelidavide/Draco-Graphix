@@ -91,7 +91,7 @@ function Hero() {
           <Segmented label="Base di stampa" value={base} onChange={setBase} options={BASES} />
           <Segmented label="Laminazione" value={finish} onChange={setFinish} options={FINISHES} />
           <div className="hero-cta">
-            <LinkButton to="/catalogo" size="lg" className="slant">
+            <LinkButton to="/catalogo" size="lg">
               Scegli il tuo kit
             </LinkButton>
             <LinkButton to="/su-misura" size="lg" variant="ghost">

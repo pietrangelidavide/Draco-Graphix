@@ -88,7 +88,7 @@ export function CartPage() {
         </ul>
         <Summary
           cta={
-            <Button block size="lg" className="slant" onClick={() => navigate('/checkout')}>
+            <Button block size="lg" onClick={() => navigate('/checkout')}>
               Vai al pagamento
             </Button>
           }
@@ -211,7 +211,7 @@ function CheckoutForm() {
             Ho letto le <Link to="/condizioni">condizioni di vendita</Link> e l’<Link to="/privacy">informativa privacy</Link>.
           </Checkbox>
           {errors.agree && <p className="err" role="alert">{errors.agree}</p>}
-          <Button type="submit" block size="lg" busy={busy} className="slant">
+          <Button type="submit" block size="lg" busy={busy}>
             Conferma l’ordine
           </Button>
         </Card>

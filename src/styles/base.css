@@ -16,7 +16,10 @@ body {
   font-family: var(--font-body);
   font-size: 16px;
   line-height: 1.5;
+  letter-spacing: -0.003em;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 h1,
@@ -25,27 +28,30 @@ h3,
 h4 {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 800;
-  font-style: italic;
-  line-height: 1.02;
-  letter-spacing: 0.005em;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.022em;
   text-wrap: balance;
 }
 
 h1 {
-  font-size: clamp(1.9rem, 5vw, 3.1rem);
-  text-transform: uppercase;
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
 }
 h2 {
-  font-size: clamp(1.4rem, 2.8vw, 1.9rem);
-  text-transform: uppercase;
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  letter-spacing: -0.026em;
 }
 h3 {
-  font-size: 1.2rem;
-  font-weight: 700;
+  font-size: 1.1875rem;
+  font-weight: 600;
+  letter-spacing: -0.014em;
 }
 h4 {
-  font-style: normal;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
 p {
@@ -55,11 +61,11 @@ p {
 
 a {
   color: var(--accent-ink);
-  text-decoration-thickness: 1px;
+  text-decoration: none;
   text-underline-offset: 3px;
 }
 a:hover {
-  text-decoration-thickness: 2px;
+  text-decoration: underline;
 }
 
 img,
@@ -89,9 +95,9 @@ address {
 code {
   font-family: ui-monospace, 'SF Mono', Consolas, monospace;
   font-size: 0.9em;
-  background: var(--neutral-bg);
-  padding: 1px 6px;
-  border-radius: 4px;
+  background: var(--fill);
+  padding: 2px 7px;
+  border-radius: 6px;
 }
 
 small {
@@ -107,12 +113,10 @@ button {
 :focus-visible {
   outline: 3px solid var(--focus);
   outline-offset: 2px;
-  border-radius: 4px;
 }
 
 ::selection {
-  background: var(--accent);
-  color: var(--on-accent);
+  background: color-mix(in srgb, var(--blue) 28%, transparent);
 }
 
 .sr-only {
@@ -131,8 +135,8 @@ button {
   z-index: 100;
   background: var(--ink);
   color: var(--bg);
-  padding: 10px 16px;
-  border-radius: var(--r-sm);
+  padding: 10px 18px;
+  border-radius: var(--r-pill);
 }
 .skip:focus {
   top: 12px;
@@ -156,16 +160,18 @@ button {
   max-width: 800px;
 }
 .section {
-  padding-block: 36px;
+  padding-block: 48px;
 }
 
 .muted {
   color: var(--muted);
 }
 .lead {
-  font-size: 1.125rem;
+  font-size: clamp(1.0625rem, 2vw, 1.3125rem);
+  line-height: 1.4;
+  letter-spacing: -0.012em;
   color: var(--muted);
-  max-width: 56ch;
+  max-width: 52ch;
 }
 .num {
   text-align: right;
@@ -204,7 +210,7 @@ button {
   border: 0;
   padding: 0;
   color: var(--accent-ink);
-  text-decoration: underline;
+  text-decoration: none;
   text-underline-offset: 3px;
   cursor: pointer;
   display: inline-flex;
@@ -212,26 +218,31 @@ button {
   gap: 6px;
 }
 .more {
-  font-weight: 600;
+  font-weight: 500;
   white-space: nowrap;
+}
+.more::after {
+  content: '\203A';
+  display: inline-block;
+  margin-left: 0.3em;
+  transition: transform 0.2s ease;
+}
+.more:hover::after {
+  transform: translateX(3px);
 }
 
 .notice {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 12px 14px;
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-left: 4px solid var(--info);
-  border-radius: var(--r-sm);
+  padding: 14px 16px;
+  background: var(--info-bg);
+  border-radius: 14px;
 }
 .notice-warn {
-  border-left-color: var(--warn);
   background: var(--warn-bg);
 }
 .notice-ok {
-  border-left-color: var(--ok);
   background: var(--ok-bg);
 }
 
@@ -245,7 +256,7 @@ button {
     grid-template-columns: minmax(0, 1fr);
   }
   .section {
-    padding-block: 24px;
+    padding-block: 32px;
   }
 }
 @media (min-width: 640px) {
@@ -270,4 +281,7 @@ button {
 .notice > b {
   flex: none;
   white-space: nowrap;
+}
+.link-btn:hover {
+  text-decoration: underline;
 }

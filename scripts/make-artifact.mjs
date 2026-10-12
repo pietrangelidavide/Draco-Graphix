@@ -11,7 +11,7 @@ for (const f of ['assets/app.js', 'assets/app.css']) {
 }
 const css = readFileSync(join(dist, 'assets/app.css'), 'utf8');
 const js = readFileSync(join(dist, 'assets/app.js'), 'utf8').replace(/<\/script/gi, '<\\/script').replace(/<!--/g, '<\\!--');
-const fonts = 'https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Big+Shoulders+Display:wght@700;800;900&display=swap';
+const fonts = 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Archivo:wght@600;700;800&family=Saira:ital,wght@1,800&display=swap';
 
 const html = `<title>Draco Graphix</title>
 <link rel="stylesheet" href="${fonts}">

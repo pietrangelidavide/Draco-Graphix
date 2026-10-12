@@ -40,8 +40,7 @@ export function CompareSlider({
     if (!el) return;
     const r = el.getBoundingClientRect();
     const x = ((clientX - r.left) / r.width) * 100; // 0..100
-    // il taglio è inclinato: al centro dell'altezza sta a `mid`, che va da -4 a 104
-    setT(Math.min(1, Math.max(0, (x + 4) / 108)));
+    setT(Math.min(1, Math.max(0, x / 100)));
   }, []);
 
   function down(e: PointerEvent<HTMLDivElement>) {

@@ -94,7 +94,7 @@ export function TeamPage() {
         </Card>
         <Honeypot value={f.hp} onChange={set('hp')} />
         <div className="row-actions">
-          <Button type="submit" size="lg" busy={busy} className="slant">Chiedi il preventivo</Button>
+          <Button type="submit" size="lg" busy={busy}>Chiedi il preventivo</Button>
           <small className="muted">Nessun impegno. Il preventivo è gratuito.</small>
         </div>
       </form>
@@ -158,7 +158,7 @@ export function ContactPage() {
                 <TextArea className="span-2" label="Messaggio" value={f.message} onChange={set('message')} rows={6} maxLength={1500} error={errors.message} />
               </div>
               <Honeypot value={f.hp} onChange={set('hp')} />
-              <Button type="submit" size="lg" busy={busy} className="slant">Invia il messaggio</Button>
+              <Button type="submit" size="lg" busy={busy}>Invia il messaggio</Button>
             </Card>
           </form>
         )}
